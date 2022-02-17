@@ -1,0 +1,13 @@
+(use-modules (srfi srfi-41))
+
+(define fibs
+    (stream-cons 0
+      (stream-cons 1
+        (stream-map + fibs (stream-cdr fibs)))))
+
+(define (main args)
+   (display (stream-ref fibs (string->number (cadr args))))
+   (newline)
+   (exit))
+
+(main (command-line))
